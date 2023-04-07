@@ -1,11 +1,14 @@
-<script setup lang="ts">
+<script lang="ts">
+import Home from '@/views/Home/Home.vue';
+export default {
+  components: {
+    Home,
+  },
+};
 </script>
 
 <template>
-  <div>
-   
-  </div>
+    <Home/>
 </template>
 
-<style scoped>
-</style>
+<style></style>
