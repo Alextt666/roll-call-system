@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="animate-wrapper">
     <Vue3Lottie 
     :animationData="AwardJSON" 
     :loop=1
@@ -23,8 +23,7 @@ export default {
   },
   methods: {
     handleAnimateComplete(){
-      console.log('animate complete')
-      console.log(this.$emit('onAnimateComplet'))
+      this.$emit('onAnimateComplet')
     }
   },
  
@@ -32,4 +31,12 @@ export default {
 };
 
 </script>
-<style></style>
+<style>
+.animate-wrapper{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 999;
+}
+</style>

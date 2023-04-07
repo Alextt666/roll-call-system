@@ -1,5 +1,6 @@
 <script lang="ts">
 import Home from '@/views/Home/Home.vue';
+
 export default {
   components: {
     Home,
@@ -9,6 +10,7 @@ export default {
 
 <template>
     <Home/>
+    
 </template>
 
 <style></style>

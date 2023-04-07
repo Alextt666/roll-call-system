@@ -12,7 +12,6 @@ const ClassList = ['三年级五班','三年级六班','三年级八班']
 </script>
 <style>
 .home-wrapper {
-  background-color: #ccc;
   width: 100vw;
   height: 100vh;
   padding: 2rem;
