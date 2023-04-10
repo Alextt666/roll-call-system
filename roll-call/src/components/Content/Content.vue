@@ -4,8 +4,6 @@
     @emitStudentInfo="handleEmitStudentInfo"
   />
   <div class="footer">
-    <!-- <button @click="handleAward" class="global-btn">奖杯</button> -->
-
     <button @click="handleRollCallAll" class="global-btn">全 班</button>
     <button @click="handleRollCall" class="global-btn">随机点名</button>
     <button class="global-btn">数据统计</button>
@@ -75,6 +73,38 @@
       </template>
     </div>
   </el-dialog>
+  <!-- 全班点名 -->
+  <el-dialog
+    v-model="allClassDialogVisible"
+    width="35%"
+    center
+    class="my-dialog-radius"
+    @close="allClassDialogVisibleClose"
+  >
+    <template #header>
+      <div class="dialog-title">学生信息</div>
+    </template>
+    <div class="dialog-info">
+      <img
+        src="@/assets/imgs/class.svg"
+        alt="avator"
+      />
+      <div class="info-text">
+        <div class="text-name">已选择全班同学</div>
+        <div class="text-class">{{ msg }}</div>
+      </div>
+    </div>
+    <div class="dialog-tags">
+      <template v-for="(item, index) in 6" :key="index">
+        <div
+          :class="['tag', index === selectIndex ? 'tag-active' : '']"
+          @click="handleTagClick(item)"
+        >
+          11
+        </div>
+      </template>
+    </div>
+  </el-dialog>
 </template>
 <script setup>
 import Award from "@/components/Lottie/Award.vue";
@@ -83,6 +113,7 @@ import RollButton from "@/components/Content/RollButton.vue";
 import { ref, reactive } from "vue";
 const centerDialogVisible = ref(false);
 const studentDialogVisible = ref(false);
+const allClassDialogVisible = ref(false);
 let showAward = ref(false);
 let student = ref("");
 let intervalId = ref(null);
@@ -160,17 +191,24 @@ function rollcallDialogClose() {
 }
 // 全班点名
 function handleRollCallAll() {
-  console.log(studentDialogVisible.value);
+  allClassDialogVisible.value = true;  
 }
+
 // 标签发送
 function handleTagClick(item) {
   handleAward();
   selectIndex.value = item;
   tagMsg.value = item;
   studentDialogVisible.value = false;
+  allClassDialogVisible.value = false;
 }
+// 学生页关闭
 function studentDialogClose() {
   selectIndex.value = 999;
+}
+// 全体页关闭
+function allClassDialogVisibleClose(){
+    selectIndex.value = 999
 }
 
 // handleTrigger
@@ -212,20 +250,7 @@ button {
   padding-left: 3px;
   letter-spacing: 15px;
 }
-.dialog-footer-btn {
-  width: 100px;
-  height: 38px;
-  box-sizing: border-box;
-  background-color: $btn-red;
-  color: $light-color;
-  text-align: center;
-  font-weight: bold;
-  .btn-text {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-}
+
 
 .dialog-footer-btn:hover {
   border: 1px solid transparent;
@@ -297,10 +322,5 @@ button {
 .global-btn:hover {
   border: none;
   box-shadow: 0 0 15px $light-gray;
-}
-
-.evaluate {
-  background-color: $info-color;
-  margin-left: 5px;
 }
 </style>

@@ -8,7 +8,7 @@ const props = defineProps({
   btnText: String,
 });
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .dialog-footer-btn {
   width: 100px;
   height: 38px;
