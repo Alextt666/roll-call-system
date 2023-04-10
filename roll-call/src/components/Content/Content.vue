@@ -10,9 +10,13 @@
     <button @click="handleRollCall" class="global-btn">随机点名</button>
     <button class="global-btn">数据统计</button>
   </div>
-  <Transition name="animate" duration="500">
-    <Award @onAnimateComplet="handleAnimateComplete" v-if="showAward" :tagMsg="tagMsg"/>
-  </Transition>
+
+  <Award
+    @animateComplet="handleAnimateComplete"
+    v-if="showAward"
+    :tagMsg="tagMsg"
+  />
+
   <!-- 随机点名 -->
   <el-dialog
     v-model="centerDialogVisible"
@@ -28,22 +32,17 @@
       {{ student }}
     </div>
     <template #footer>
-      <div class="dialog-footer">
-        <button class="dialog-footer-btn" v-if="calling">
-          <div class="btn-text" @click="handleRollCallStop">结 束</div>
-        </button>
-        <button class="dialog-footer-btn" v-else>
-          <div class="btn-text" @click="handleRollCall">开 始</div>
-        </button>
-        <button class="dialog-footer-btn evaluate">
-          <div class="btn-text" @click="handleTrigger">评 价</div>
-        </button>
-      </div>
+      <RollButton
+        :btn-text="'结 束'"
+        @click="handleRollCallStop"
+        v-if="calling"
+      />
+      <RollButton :btn-text="'开 始'" @click="handleRollCall" v-else />
+      <RollButton :btn-text="'评 价'" @click="handleTrigger" />
     </template>
   </el-dialog>
   <!-- 标签 -->
- <transition  name="mytag" duration="1000">
-    <el-dialog
+  <el-dialog
     v-model="studentDialogVisible"
     width="35%"
     center
@@ -66,17 +65,21 @@
       </div>
     </div>
     <div class="dialog-tags">
-      <template v-for="(item,index) in 6" :key="index">
-        <div :class="['tag',index === selectIndex ? 'tag-active':'']" @click="handleTagClick(item)">11</div>
+      <template v-for="(item, index) in 6" :key="index">
+        <div
+          :class="['tag', index === selectIndex ? 'tag-active' : '']"
+          @click="handleTagClick(item)"
+        >
+          11
+        </div>
       </template>
     </div>
   </el-dialog>
- </transition>
-
 </template>
 <script setup>
 import Award from "@/components/Lottie/Award.vue";
 import Student from "@/components/Student/Student.vue";
+import RollButton from "@/components/Content/RollButton.vue";
 import { ref, reactive } from "vue";
 const centerDialogVisible = ref(false);
 const studentDialogVisible = ref(false);
@@ -86,12 +89,13 @@ let intervalId = ref(null);
 let calling = ref(false);
 let curStudent = reactive({});
 let selectIndex = ref(999);
-let tagMsg = ref('');
+let tagMsg = ref("");
 let count = 0;
 
 const props = defineProps({
   msg: String,
 });
+
 const studentList = reactive([
   { name: "王大炮", sex: 0 },
   { name: "张根硕", sex: 0 },
@@ -131,7 +135,6 @@ function handleEmitStudentInfo(item) {
 // 奖杯方法
 function handleAward() {
   showAward.value = true;
-  console.log("show Awaard");
 }
 function handleAnimateComplete() {
   showAward.value = false;
@@ -142,11 +145,9 @@ function handleRollCall() {
   centerDialogVisible.value = true;
   calling.value = true;
   intervalId = setInterval(function () {
-    student.value = studentList[count].name;
     count++;
-    if (count >= studentList.length) {
-      count = 0;
-    }
+    count = count >= studentList.length ? 0 : count;
+    student.value = studentList[count].name;
   }, 50);
 }
 function handleRollCallStop() {
@@ -165,31 +166,20 @@ function handleRollCallAll() {
 function handleTagClick(item) {
   handleAward();
   selectIndex.value = item;
-  tagMsg.value = item
+  tagMsg.value = item;
   studentDialogVisible.value = false;
 }
-function studentDialogClose(){
-  selectIndex = 999;
+function studentDialogClose() {
+  selectIndex.value = 999;
 }
 
 // handleTrigger
 function handleTrigger() {
   centerDialogVisible.value = false;
-  studentDialogVisible.value = true;
+  handleEmitStudentInfo(studentList[count]);
 }
 </script>
 <style scoped lang="scss">
-
-// transation 动画
-.animate-enter-active, .animate-leave-active{
-    transition: opacity 0.5s;
-}
-.animate-enter, .animate-leave-to {
-  opacity: 0;
-}
-
-
-
 button {
   width: 8rem;
   height: 3rem;
