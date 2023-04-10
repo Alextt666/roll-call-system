@@ -6,7 +6,7 @@
   <div class="footer">
     <button @click="handleRollCallAll" class="global-btn">全 班</button>
     <button @click="handleRollCall" class="global-btn">随机点名</button>
-    <button class="global-btn">数据统计</button>
+    <button @click="handleData" class="global-btn">数据统计</button>
   </div>
 
   <Award
@@ -85,10 +85,7 @@
       <div class="dialog-title">学生信息</div>
     </template>
     <div class="dialog-info">
-      <img
-        src="@/assets/imgs/class.svg"
-        alt="avator"
-      />
+      <img src="@/assets/imgs/class.svg" alt="avator" />
       <div class="info-text">
         <div class="text-name">已选择全班同学</div>
         <div class="text-class">{{ msg }}</div>
@@ -105,15 +102,46 @@
       </template>
     </div>
   </el-dialog>
+
+  <!-- 数据统计 -->
+  <el-dialog
+    v-model="dataDialogVisible"
+    width="35%"
+    center
+    class="my-dialog-radius"
+  >
+    <template #header>
+      <div class="dialog-title" style="border-bottom: 1px solid #ccc">
+        数据统计
+      </div>
+      <div class="change-btns">
+        <div class="btns-wrapper">
+          <button class="change-btn" @click="handleChangeView(true)">
+            班级得分
+          </button>
+          <button class="change-btn" @click="handleChangeView(false)">
+            个人得分
+          </button>
+        </div>
+      </div>
+    </template>
+    <div id="data-content">
+      <AllData v-if="isAll" />
+      <Personal v-else />
+    </div>
+  </el-dialog>
 </template>
 <script setup>
 import Award from "@/components/Lottie/Award.vue";
 import Student from "@/components/Student/Student.vue";
+import Personal from "@/components/DataStruct/Person.vue";
+import AllData from "@/components/DataStruct/AllData.vue";
 import RollButton from "@/components/Content/RollButton.vue";
 import { ref, reactive } from "vue";
 const centerDialogVisible = ref(false);
 const studentDialogVisible = ref(false);
 const allClassDialogVisible = ref(false);
+const dataDialogVisible = ref(false);
 let showAward = ref(false);
 let student = ref("");
 let intervalId = ref(null);
@@ -121,6 +149,7 @@ let calling = ref(false);
 let curStudent = reactive({});
 let selectIndex = ref(999);
 let tagMsg = ref("");
+let isAll = ref(true);
 let count = 0;
 
 const props = defineProps({
@@ -191,7 +220,7 @@ function rollcallDialogClose() {
 }
 // 全班点名
 function handleRollCallAll() {
-  allClassDialogVisible.value = true;  
+  allClassDialogVisible.value = true;
 }
 
 // 标签发送
@@ -207,14 +236,23 @@ function studentDialogClose() {
   selectIndex.value = 999;
 }
 // 全体页关闭
-function allClassDialogVisibleClose(){
-    selectIndex.value = 999
+function allClassDialogVisibleClose() {
+  selectIndex.value = 999;
 }
 
 // handleTrigger
 function handleTrigger() {
   centerDialogVisible.value = false;
   handleEmitStudentInfo(studentList[count]);
+}
+
+// 数据统计
+function handleData() {
+  dataDialogVisible.value = true;
+}
+// 全部 & 个人
+function handleChangeView(type) {
+  isAll.value = type;
 }
 </script>
 <style scoped lang="scss">
@@ -250,7 +288,6 @@ button {
   padding-left: 3px;
   letter-spacing: 15px;
 }
-
 
 .dialog-footer-btn:hover {
   border: 1px solid transparent;
@@ -322,5 +359,45 @@ button {
 .global-btn:hover {
   border: none;
   box-shadow: 0 0 15px $light-gray;
+}
+
+.change-btns {
+  text-align: left;
+  .btns-wrapper {
+    width: 12rem;
+    height: 1.8rem;
+    background: $lighter-gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+  }
+}
+.change-btn {
+  width: 6rem;
+  border-radius: 10px;
+  height: 1.8rem;
+  line-height: 1.8rem;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  font-size: 0.8rem;
+  color: $light-color;
+  background-color: $info-color;
+}
+
+#data-content {
+  border: 1px solid #ccc;
+  min-height: 400px;
+  height: 30rem;
+  transform: translateY(-5%);
+}
+@media screen and (min-width: 1445px) {
+  #data-content {
+    border: 1px solid #ccc;
+    min-height: 400px;
+    height: 38rem;
+    transform: translateY(-5%);
+  }
 }
 </style>
