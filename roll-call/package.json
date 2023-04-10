@@ -4,8 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite ",
+    "dev:stage": "vite --mode stage",
+    "dev:prod": "vite --mode prod",
     "build": "vue-tsc && vite build",
+    "build:stage": "vue-tsc && vite build --mode stage",
+    "build:prod": "vue-tsc && vite build --mode prod",
     "preview": "vite preview"
   },
   "dependencies": {

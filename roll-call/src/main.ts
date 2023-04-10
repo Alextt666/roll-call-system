@@ -12,3 +12,4 @@ const app = createApp(App);
 app.use(Vue3Lottie, { name: "Vue3Lottie" })
 app.use(ElementPlus)
 app.mount('#app')
+
