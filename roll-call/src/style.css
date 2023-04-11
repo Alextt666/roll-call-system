@@ -47,9 +47,9 @@ button {
   transition: border-color 0.25s;
   outline: none;
 }
-button:hover {
+/* button:hover {
   border-color: #646cff;
-}
+} */
 #app {
   max-width: 1920px;
   box-sizing: border-box;

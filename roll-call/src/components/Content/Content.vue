@@ -116,10 +116,10 @@
       </div>
       <div class="change-btns">
         <div class="btns-wrapper">
-          <button class="change-btn" @click="handleChangeView(true)">
+          <button :class="['change-btn',isAll?'change-btn-active':'']" @click="handleChangeView(true)">
             班级得分
           </button>
-          <button class="change-btn" @click="handleChangeView(false)">
+          <button :class="['change-btn',!isAll?'change-btn-active':'']" @click="handleChangeView(false)">
             个人得分
           </button>
         </div>
@@ -371,6 +371,7 @@ button {
     justify-content: center;
     align-items: center;
     margin-top: 10px;
+    border-radius: 20px;
   }
 }
 .change-btn {
@@ -382,6 +383,10 @@ button {
   padding: 0;
   margin: 0;
   font-size: 0.8rem;
+  border-radius: 20px;
+  background: $lighter-gray;
+}
+.change-btn-active {
   color: $light-color;
   background-color: $info-color;
 }
