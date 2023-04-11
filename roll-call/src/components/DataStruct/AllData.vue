@@ -34,6 +34,7 @@ function schoolChangeEffect(item, index) {
   display: flex;
   justify-content: space-around;
   margin-top: 0.5rem;
+  min-height: 1.5rem;
   cursor: pointer;
   color: $text-gray;
 }
