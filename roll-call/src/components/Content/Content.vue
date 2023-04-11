@@ -394,7 +394,7 @@ button {
 #data-content {
   border: 1px solid #ccc;
   min-height: 400px;
-  height: 30rem;
+  height: 28rem;
   transform: translateY(-5%);
 }
 @media screen and (min-width: 1445px) {
