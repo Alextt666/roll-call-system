@@ -19,15 +19,18 @@ onMounted(() => {
     data,
     angleField: "value",
     colorField: "type",
+    color:['#A9E7FF','#5269FF','#D8F4FF','#A1D5FF','#56CFFF'],
     radius: 1,
     innerRadius: 0.6,
     legend: false,
+    
     label: {
       // type:'inner',
       // type:'outer',
       type: "spider",
       // offset: "-30%",
-      content: "{value}",
+      // content: "{type}-{value}",
+      content: `{name}\n{value}`,
       style: {
         textAlign: "center",
         fontSize: 10,
