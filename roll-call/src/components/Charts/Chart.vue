@@ -3,7 +3,7 @@
 </template>
 <script setup>
 import { Pie } from "@antv/g2plot";
-import { onMounted } from "vue";
+import { onMounted ,nextTick} from "vue";
 onMounted(() => {
   const data = [
     { type: "分类一", value: 27 },
@@ -23,7 +23,7 @@ onMounted(() => {
     radius: 1,
     innerRadius: 0.6,
     legend: false,
-    
+    autoFit:true,
     label: {
       // type:'inner',
       // type:'outer',
@@ -52,13 +52,17 @@ onMounted(() => {
     },
   });
 
-  piePlot.render();
+  nextTick(()=>{
+    piePlot.render();
+  })
 });
 </script>
 <style scoped lang="scss">
 #container{
     width: 28rem;
     height: 13.5rem;
+
+    margin: 0 auto;
     margin-top: 20px;
 }
 </style>
