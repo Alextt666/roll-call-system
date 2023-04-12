@@ -1,7 +1,7 @@
 <template>
   <div class="detail-title">奖杯明细：</div>
-  <div class="detail-content">
-    <template v-for="item in 4">
+  <div class="detail-content" id="detail-c">
+    <template v-for="item in 5">
       <div class="detail-item">
         <div class="item-tag">造型表现佳:</div>
         <div class="item-name">
@@ -27,9 +27,10 @@
   margin: 10px;
   padding: 15px;
   border-radius: 10px;
-  max-height: 6.2rem;
-  min-height: 4rem;
+  max-height: 7.5rem;
+  min-height: 7rem;
   overflow: scroll;
+  overflow-x: hidden;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   grid-gap: 5px;
@@ -79,4 +80,6 @@
     }
   }
 }
+
 </style>
+

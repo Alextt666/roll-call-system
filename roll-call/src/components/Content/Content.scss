@@ -29,6 +29,7 @@ button {
     font-size: 5rem;
     padding-left: 3px;
     letter-spacing: 15px;
+
   }
   
   .dialog-footer-btn:hover {
@@ -134,16 +135,16 @@ button {
   }
   
   #data-content {
-    border: 1px solid #ccc;
     min-height: 400px;
     height: 28rem;
     transform: translateY(-5%);
+    overflow: hidden;
   }
   @media screen and (min-width: 1445px) {
     #data-content {
-      border: 1px solid #ccc;
       min-height: 400px;
-      height: 38rem;
+      height: 32rem;
       transform: translateY(-5%);
     }
+
   }

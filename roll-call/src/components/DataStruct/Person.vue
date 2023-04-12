@@ -38,7 +38,24 @@
     </div>
   </div>
   <div class="top-two">
-    
+    <div>排名</div>
+    <div>头像</div>
+    <div>姓名</div>
+    <div>班级</div>
+    <div>奖杯数</div>
+  </div>
+  <div class="top-three">
+    <template v-for="item in 8">
+      <div class="three-text" >
+      <div>113</div>
+      <div>
+        <img src="@/assets/imgs/boy.svg" alt="avatar" class="three-text-img">
+      </div>
+      <div>艾纽纽</div>
+      <div>优卓实验一小三(2)班</div>
+      <div>1</div>
+    </div>
+    </template>
   </div>
 </template>
 <script setup></script>
@@ -119,6 +136,34 @@
       #f6f6f6 0%,
       rgba(246, 246, 246, 0) 100%
     );
+  }
+}
+.top-two {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 2fr 1fr;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 10px;
+  background-color: $lightest-gray;
+}
+.top-three {
+  max-height: 18.8rem;
+  min-height: 14rem;
+  overflow: scroll;
+  overflow-x: hidden;
+  .three-text {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 2fr 1fr;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    .three-text-img{
+      width: 2rem;
+    }
+
   }
 }
 </style>
