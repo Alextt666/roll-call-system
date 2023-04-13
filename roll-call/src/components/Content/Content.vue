@@ -54,11 +54,11 @@
       <img
         src="@/assets/imgs/boy.svg"
         alt="avator"
-        v-if="curStudent.sex == 0"
+        v-if="curStudent.studentGender == 0"
       />
-      <img src="@/assets/imgs/boy.svg" alt="avator" v-else />
+      <img src="@/assets/imgs/girl.svg" alt="avator" v-else />
       <div class="info-text">
-        <div class="text-name">{{ curStudent.name }}</div>
+        <div class="text-name">{{ curStudent.studentName }}</div>
         <div class="text-class">{{ msg }}</div>
       </div>
     </div>
@@ -137,7 +137,8 @@ import Student from "@/components/Student/Student.vue";
 import Personal from "@/components/DataStruct/Person.vue";
 import AllData from "@/components/DataStruct/AllData.vue";
 import RollButton from "@/components/Content/RollButton.vue";
-import { ref, reactive } from "vue";
+import {store} from '@/store/index';
+import { ref, reactive ,toRefs,toRef} from "vue";
 const centerDialogVisible = ref(false);
 const studentDialogVisible = ref(false);
 const allClassDialogVisible = ref(false);
@@ -156,35 +157,15 @@ const props = defineProps({
   msg: String,
 });
 
-const studentList = reactive([
-  { name: "王大炮", sex: 0 },
-  { name: "张根硕", sex: 0 },
-  { name: "李立柱", sex: 1 },
-  { name: "周答熊", sex: 1 },
-  { name: "林铁蛋", sex: 0 },
-  { name: "金铁锤", sex: 1 },
-  { name: "朱艺枝", sex: 1 },
-  { name: "马史", sex: 0 },
-  { name: "杨奋", sex: 0 },
-  { name: "王大炮", sex: 0 },
-  { name: "张根硕", sex: 0 },
-  { name: "李立柱", sex: 1 },
-  { name: "周答熊", sex: 1 },
-  { name: "林铁蛋", sex: 0 },
-  { name: "金铁锤", sex: 1 },
-  { name: "朱艺枝", sex: 1 },
-  { name: "马史", sex: 0 },
-  { name: "杨奋", sex: 0 },
-  { name: "王大炮", sex: 0 },
-  { name: "张根硕", sex: 0 },
-  { name: "李立柱", sex: 1 },
-  { name: "周答熊", sex: 1 },
-  { name: "林铁蛋", sex: 0 },
-  { name: "金铁锤", sex: 1 },
-  { name: "朱艺枝", sex: 1 },
-  { name: "马史", sex: 0 },
-  { name: "杨奋", sex: 0 },
-]);
+let studentList = reactive([]);
+store.allSchool[0].students.forEach(item=>{
+  studentList.push(item);
+})
+
+// 获取标签
+
+
+
 
 // 点击学生
 function handleEmitStudentInfo(item) {
