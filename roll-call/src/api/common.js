@@ -6,7 +6,7 @@ const request = axios.create({
 });
 request.interceptors.response.use(
   (res) => {
-    return res;
+    return res.data;
   },
   (err) => {
     const errorMsg = {

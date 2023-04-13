@@ -67,6 +67,8 @@ button {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: min-content;
+    align-content: flex-start;
+    overflow: hidden;
     grid-gap: 10px;
     .tag {
       border-radius: 10px;

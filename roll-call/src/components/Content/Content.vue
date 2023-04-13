@@ -63,12 +63,12 @@
       </div>
     </div>
     <div class="dialog-tags">
-      <template v-for="(item, index) in 6" :key="index">
+      <template v-for="(item, index) in tagList" :key="index">
         <div
           :class="['tag', index === selectIndex ? 'tag-active' : '']"
-          @click="handleTagClick(item)"
+          @click="handleTagClick(item.label)"
         >
-          11
+          {{ item.label }}
         </div>
       </template>
     </div>
@@ -92,12 +92,12 @@
       </div>
     </div>
     <div class="dialog-tags">
-      <template v-for="(item, index) in 6" :key="index">
+      <template v-for="(item, index) in tagList" :key="index">
         <div
           :class="['tag', index === selectIndex ? 'tag-active' : '']"
-          @click="handleTagClick(item)"
+          @click="handleTagClick(item.label)"
         >
-          11
+          {{ item.label }}
         </div>
       </template>
     </div>
@@ -139,6 +139,7 @@ import AllData from "@/components/DataStruct/AllData.vue";
 import RollButton from "@/components/Content/RollButton.vue";
 import {store} from '@/store/index';
 import { ref, reactive ,toRefs,toRef} from "vue";
+import { fetTagList } from "@/api/request";
 const centerDialogVisible = ref(false);
 const studentDialogVisible = ref(false);
 const allClassDialogVisible = ref(false);
@@ -152,6 +153,7 @@ let selectIndex = ref(999);
 let tagMsg = ref("");
 let isAll = ref(true);
 let count = 0;
+const tagList = reactive([]);
 
 const props = defineProps({
   msg: String,
@@ -163,9 +165,20 @@ store.allSchool[0].students.forEach(item=>{
 })
 
 // 获取标签
+async function fetTagData(id){
+  try {
+    const res = await fetTagList(id);
+    if(res?.rows){
+      res.rows.forEach(item=>{
+      tagList.push(item)
+    });
+    }
+  } catch (error) {
+    
+  }
+}
 
-
-
+fetTagData(store.tableId);
 
 // 点击学生
 function handleEmitStudentInfo(item) {
@@ -188,7 +201,7 @@ function handleRollCall() {
   intervalId = setInterval(function () {
     count++;
     count = count >= studentList.length ? 0 : count;
-    student.value = studentList[count].name;
+    student.value = studentList[count].studentName;
   }, 50);
 }
 function handleRollCallStop() {
