@@ -45,7 +45,7 @@
     <div>奖杯数</div>
   </div>
   <div class="top-three">
-    <template v-for="item in 8">
+    <template v-for="item in 10">
       <div class="three-text" >
       <div>113</div>
       <div>
@@ -148,7 +148,7 @@
   background-color: $lightest-gray;
 }
 .top-three {
-  max-height: 18.8rem;
+  max-height: 21.8rem;
   min-height: 14rem;
   overflow: scroll;
   overflow-x: hidden;

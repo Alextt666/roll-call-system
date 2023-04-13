@@ -136,15 +136,17 @@ button {
   
   #data-content {
     min-height: 400px;
-    height: 28rem;
+    // height: 28rem;
+    height: 35vw;
     transform: translateY(-5%);
+  }
+  .personal{
     overflow: hidden;
   }
   @media screen and (min-width: 1445px) {
     #data-content {
       min-height: 400px;
-      height: 32rem;
+      height: 35rem;
       transform: translateY(-5%);
     }
-
   }

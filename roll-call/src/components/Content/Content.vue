@@ -125,7 +125,7 @@
         </div>
       </div>
     </template>
-    <div id="data-content">
+    <div id="data-content" :class="isAll?'':'personal'">
       <AllData v-if="isAll" />
       <Personal v-else />
     </div>
