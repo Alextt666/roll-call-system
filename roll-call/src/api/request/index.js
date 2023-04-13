@@ -8,9 +8,18 @@ export function fetchRoster(timetableId){
 }
 
 // 标签
-export function fetTagList(timetableId){
+export function fetchTagList(timetableId){
     return request({
         url:`/api/studentLabel/${timetableId}`,
+        method:'get',
+    })
+}
+
+
+// 数据统计
+export function fetchData(timetableId){
+    return request({
+        url:`/api/studentCupInfo/${timetableId}`,
         method:'get',
     })
 }

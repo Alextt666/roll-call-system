@@ -139,7 +139,7 @@ import AllData from "@/components/DataStruct/AllData.vue";
 import RollButton from "@/components/Content/RollButton.vue";
 import {store} from '@/store/index';
 import { ref, reactive ,toRefs,toRef} from "vue";
-import { fetTagList } from "@/api/request";
+import { fetchTagList,fetchData } from "@/api/request";
 const centerDialogVisible = ref(false);
 const studentDialogVisible = ref(false);
 const allClassDialogVisible = ref(false);
@@ -165,9 +165,9 @@ store.allSchool[0].students.forEach(item=>{
 })
 
 // 获取标签
-async function fetTagData(id){
+async function fetchTagData(id){
   try {
-    const res = await fetTagList(id);
+    const res = await fetchTagList(id);
     if(res?.rows){
       res.rows.forEach(item=>{
       tagList.push(item)
@@ -178,8 +178,13 @@ async function fetTagData(id){
   }
 }
 
-fetTagData(store.tableId);
-
+// 获取数据
+async function fetchChartsData(id){
+   const res = await fetchData(id);
+   console.log(res.data,'res')
+}
+fetchTagData(store.tableId);
+fetchChartsData(store.tableId);
 // 点击学生
 function handleEmitStudentInfo(item) {
   studentDialogVisible.value = true;
