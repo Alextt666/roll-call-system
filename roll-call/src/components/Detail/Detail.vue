@@ -6,10 +6,14 @@
         <div class="item-tag">{{ item.studentLabel }}:</div>
         <div class="item-name">
           <template v-for="student in item.students">
-            <div class="name">{{ student || '无' }}</div>
+            <div class="name">{{ student || "无" }}</div>
           </template>
-          <div class="tag-count">获得</div>
-          <div class="count">{{`${item.studentLabel}+${item.studentLabelCount}`}}</div>
+          <div style="display: flex;align-items: center;justify-content: center;">
+            <div class="tag-count">获得</div>
+            <div class="count">
+              {{ `${item.studentLabel}+${item.studentLabelCount}` }}
+            </div>
+          </div>
         </div>
       </div>
     </template>

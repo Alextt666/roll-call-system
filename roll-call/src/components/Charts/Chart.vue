@@ -13,7 +13,7 @@ let data = store.classScore[props.selectedItem].detail.map((item) => {
 });
 onMounted(() => {
   const piePlot = new Pie("container", {
-    appendPadding: 10,
+    appendPadding: 15,
     data,
     angleField: "value",
     colorField: "type",
@@ -45,11 +45,12 @@ onMounted(() => {
           fontWeight: 400,
           fontSize: 14,
         },
-        content: `奖杯数：${store.classScore[props.selectedItem].studentCupCount}`,
+        content: `奖杯数：${
+          store.classScore[props.selectedItem].studentCupCount
+        }`,
       },
     },
   });
-
   nextTick(() => {
     piePlot.render();
   });
@@ -58,9 +59,8 @@ onMounted(() => {
 <style scoped lang="scss">
 #container {
   width: 28rem;
-  height: 13.5rem;
-
+  height: 14rem;
   margin: 0 auto;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 </style>

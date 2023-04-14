@@ -2,8 +2,7 @@
   <div class="content">
     <template v-for="item in studentList" >
       <div @click="handleEmitStudentInfo(item)" class="content-item">
-        <img class="content-img" src="@/assets/imgs/boy.svg" alt="avator" v-if="item.studentGender == 0"/>
-        <img class="content-img" src="@/assets/imgs/girl.svg" alt="avator" />
+        <img class="content-img" :src="item.avatar" alt="avator" /> 
         <div class="content-name">{{ item.studentName }}</div>
       </div>
     </template>

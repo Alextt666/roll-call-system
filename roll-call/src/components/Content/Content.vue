@@ -52,11 +52,10 @@
     </template>
     <div class="dialog-info">
       <img
-        src="@/assets/imgs/boy.svg"
+        :src="curStudent.avatar"
         alt="avator"
-        v-if="curStudent.studentGender == 0"
+        
       />
-      <img src="@/assets/imgs/girl.svg" alt="avator" v-else />
       <div class="info-text">
         <div class="text-name">{{ curStudent.studentName }}</div>
         <div class="text-class">{{ msg }}</div>

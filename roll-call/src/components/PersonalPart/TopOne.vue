@@ -1,7 +1,7 @@
 <template>
   <div class="top-one">
     <div class="top-item" v-if="two">
-      <img src="@/assets/imgs/girl.svg" alt="avatar" class="item-img" />
+      <img :src="two.avatar" alt="avatar" class="item-img" />
       <img src="@/assets/imgs/scap.svg" alt="cap" class="item-cap" />
       <img src="@/assets/imgs/2.svg" alt="2" class="item-no" />
       <div class="top-item-content silver">
@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="top-item top" v-if="one">
-      <img src="@/assets/imgs/boy.svg" alt="avatar" class="item-img" />
+      <img :src="one.avatar" alt="avatar" class="item-img" />
       <img src="@/assets/imgs/gcap.svg" alt="cap" class="item-cap" />
       <img src="@/assets/imgs/1.svg" alt="2" class="item-no" />
       <div class="top-item-content golden">
@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="top-item" v-if="three">
-      <img src="@/assets/imgs/girl.svg" alt="avatar" class="item-img" />
+      <img :src="three.avatar" alt="avatar" class="item-img" />
       <img src="@/assets/imgs/bcap.svg" alt="cap" class="item-cap" />
       <img src="@/assets/imgs/3.svg" alt="2" class="item-no" />
       <div class="top-item-content bronze">

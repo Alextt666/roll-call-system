@@ -5,7 +5,7 @@
         <div>{{ index + 4 }}</div>
         <div>
           <img
-            src="@/assets/imgs/boy.svg"
+            :src="item.avatar"
             alt="avatar"
             class="three-text-img"
           />
