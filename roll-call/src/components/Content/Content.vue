@@ -211,7 +211,6 @@ fetchChartsData(store.tableId);
 function handleEmitStudentInfo(item) {
   studentDialogVisible.value = true;
   curStudent = item;
-  console.log(item,'stuInfo Item')
 }
 
 // 奖杯方法

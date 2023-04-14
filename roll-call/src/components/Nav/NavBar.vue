@@ -27,7 +27,7 @@ watch(
 );
 
 const handleClick = (tab: TabsPaneContext, event: Event) => {
-  console.log(tab, event);
+  console.log(tab.index, event);
 };
 </script>
 <style>
