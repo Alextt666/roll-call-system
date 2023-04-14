@@ -14,7 +14,7 @@
     v-if="showAward"
     :tagMsg="tagMsg"
   />
- 
+
   <!-- 随机点名 -->
   <el-dialog
     v-model="centerDialogVisible"
@@ -66,7 +66,7 @@
       <template v-for="(item, index) in tagList" :key="index">
         <div
           :class="['tag', index === selectIndex ? 'tag-active' : '']"
-          @click="handleTagClick(item.label)"
+          @click="handleTagClick(item, 1)"
         >
           {{ item.label }}
         </div>
@@ -95,7 +95,7 @@
       <template v-for="(item, index) in tagList" :key="index">
         <div
           :class="['tag', index === selectIndex ? 'tag-active' : '']"
-          @click="handleTagClick(item.label)"
+          @click="handleTagClick(item, 0)"
         >
           {{ item.label }}
         </div>
@@ -144,9 +144,8 @@ import Personal from "@/components/DataStruct/Person.vue";
 import AllData from "@/components/DataStruct/AllData.vue";
 import RollButton from "@/components/Content/RollButton.vue";
 import { store } from "@/store/index";
-import { ref, reactive, toRefs, toRef } from "vue";
-import { fetchTagList, fetchData } from "@/api/request";
-import { ElMessage } from "element-plus";
+import { ref, reactive, toRefs, toRef, watch } from "vue";
+import { fetchTagList, postAward } from "@/api/request";
 const centerDialogVisible = ref(false);
 const studentDialogVisible = ref(false);
 const allClassDialogVisible = ref(false);
@@ -161,18 +160,29 @@ let tagMsg = ref("");
 let isAll = ref(true);
 let count = 0;
 const tagList = reactive([]);
+let studentList = reactive([]);
 
 const props = defineProps({
   msg: String,
+  schoolIndex: String,
 });
 
-let studentList = reactive([]);
-store.allSchool[0].students.forEach((item) => {
-  studentList.push(item);
-});
+watch(
+  () => props.schoolIndex,
+  (newValue) => {
+    changeSchoolList(newValue);
+  },
+  { immediate: true }
+);
 
-
-
+// 当前学校
+function changeSchoolList(index) {
+  studentList = [];
+  store.allSchool[index].students.forEach((item) => {
+    studentList.push(item);
+  });
+  store.updateTimetableClassroomId(index);
+}
 
 // 获取标签
 async function fetchTagData(id) {
@@ -185,28 +195,8 @@ async function fetchTagData(id) {
     }
   } catch (error) {}
 }
-
-// 获取全班图标数据
-async function fetchChartsData(id) {
-  const res = await fetchData(id);
-
-  try {
-    if (res?.data?.classData) {
-      res.data.classData.forEach((item) => store.setClassScore(item));
-    }
-    if (res?.data?.studentRanking) {
-      res.data.studentRanking.forEach((item) => store.setStudentRanking(item));
-    }
-  } catch (error) {
-    ElMessage({
-      type: "warning",
-      message: "DataStructure has an Error! Please Check Console! ",
-    });
-    console.log(error);
-  }
-}
 fetchTagData(store.tableId);
-fetchChartsData(store.tableId);
+
 // 点击学生
 function handleEmitStudentInfo(item) {
   studentDialogVisible.value = true;
@@ -216,7 +206,6 @@ function handleEmitStudentInfo(item) {
 // 奖杯方法
 function handleAward() {
   showAward.value = true;
-
 }
 function handleAnimateComplete() {
   showAward.value = false;
@@ -246,12 +235,27 @@ function handleRollCallAll() {
 }
 
 // 标签发送
-function handleTagClick(item) {
+function handleTagClick(item, type) {
   handleAward();
-  selectIndex.value = item;
-  tagMsg.value = item;
+  // selectIndex.value = item;
+  tagMsg.value = item.label;
   studentDialogVisible.value = false;
   allClassDialogVisible.value = false;
+  if (type == 0) {
+    postAward({
+      timetableId: store.tableId,
+      timetableClassroomId: store.timetableClassroomId,
+      studentId: "",
+      studentLabelId: item.id,
+    });
+  } else {
+    postAward({
+      timetableId: store.tableId,
+      timetableClassroomId: store.timetableClassroomId,
+      studentId: curStudent.id,
+      studentLabelId: item.id,
+    });
+  }
 }
 // 学生页关闭
 function studentDialogClose() {

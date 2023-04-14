@@ -1,7 +1,7 @@
 <template>
   <div class="content">
-    <template v-for="item in studentList">
-      <div @click="handleEmitStudentInfo(item)">
+    <template v-for="item in studentList" >
+      <div @click="handleEmitStudentInfo(item)" class="content-item">
         <img class="content-img" src="@/assets/imgs/boy.svg" alt="avator" v-if="item.studentGender == 0"/>
         <img class="content-img" src="@/assets/imgs/girl.svg" alt="avator" />
         <div class="content-name">{{ item.studentName }}</div>
@@ -29,8 +29,9 @@ function handleEmitStudentInfo(item) {
   gap: 20px;
   grid-template-columns: repeat(10, 1fr);
   overflow: scroll;
-  div {
+  .content-item {
     cursor: pointer;
+    max-height: 6.5rem;
   }
   .content-img {
     width: 64px;

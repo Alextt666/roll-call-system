@@ -29,6 +29,7 @@ const props = defineProps({
 });
 const isTextMore = ref(false);
 let awardDetailList = reactive([]);
+
 watch(
   () => props.selectedItem,
   (newValue) => {
@@ -44,12 +45,12 @@ const clickMoreEffect = () => {
 // more结束
 .text-more-enter-active,
 .text-more-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+  transition: all 0.8s cubic-bezier(1, 0.6, 0.8, 1);
 }
 
 .text-more-enter-from,
 .text-more-leave-to {
-  transform: translateY(20px);
+  transform: translateY(10px);
   opacity: 0;
 }
 

@@ -1,6 +1,6 @@
 <template>
   <div class="class-items">
-    <template v-for="(item, index) in schoolList">
+    <template v-for="(item, index) in schoolListDetail">
       <div
         :class="[
           'class-item',
@@ -20,7 +20,7 @@ import { ref } from "vue";
 import { store } from "@/store/index";
 import Chart from "../Charts/Chart.vue";
 import Detail from "../Detail/Detail.vue";
-const schoolList = store.classScore;
+const schoolListDetail = store.classScore;
 let selectedSchool = ref(0);
 function schoolChangeEffect(index) {
   selectedSchool.value = index;
