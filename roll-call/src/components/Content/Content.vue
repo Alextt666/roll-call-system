@@ -178,11 +178,13 @@ async function fetchTagData(id){
   }
 }
 
-// 获取数据
+// 获取全班图标数据
 async function fetchChartsData(id){
    const res = await fetchData(id);
-   console.log(res.data,'res')
-}
+   if(res?.data?.classData){
+    res.data.classData.forEach(item=> store.setClassScore(item));
+   }
+  }
 fetchTagData(store.tableId);
 fetchChartsData(store.tableId);
 // 点击学生

@@ -1,34 +1,47 @@
 <template>
   <div class="detail-title">奖杯明细：</div>
-  <div :class="['detail-content',isTextMore?'detail-content-more':'']">
-    <template v-for="item in 5">
+  <div :class="['detail-content', isTextMore ? 'detail-content-more' : '']">
+    <template v-for="item in awardDetailList">
       <div class="detail-item">
-        <div class="item-tag">造型表现佳:</div>
+        <div class="item-tag">{{ item.studentLabel }}:</div>
         <div class="item-name">
-          <div class="name">李晓峰</div>
-          <div class="name">李晓峰</div>
+          <template v-for="student in item.students">
+            <div class="name">{{ student || '无' }}</div>
+          </template>
           <div class="tag-count">获得</div>
-          <div class="count">造型表现佳+15</div>
+          <div class="count">{{`${item.studentLabel}+${item.studentLabelCount}`}}</div>
         </div>
       </div>
     </template>
-    
   </div>
   <transition name="text-more" mode="">
     <div class="more-btn" v-if="!isTextMore">
-    <div @click="clickMoreEffect">查看更多</div>
-  </div>
+      <div @click="clickMoreEffect">查看更多</div>
+    </div>
   </transition>
 </template>
 <script setup>
-import {ref} from 'vue';
-  const isTextMore = ref(false);
-  const clickMoreEffect = ()=>{
-    isTextMore.value = true;
-  }
+import { ref, reactive, watch } from "vue";
+import { store } from "@/store/index";
+
+const props = defineProps({
+  selectedItem: Number,
+});
+const isTextMore = ref(false);
+let awardDetailList = reactive([]);
+watch(
+  () => props.selectedItem,
+  (newValue) => {
+    awardDetailList = store.classScore[newValue].detail;
+  },
+  { immediate: true }
+);
+const clickMoreEffect = () => {
+  isTextMore.value = true;
+};
 </script>
 <style scoped lang="scss">
-// more结束 
+// more结束
 .text-more-enter-active,
 .text-more-leave-active {
   transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
@@ -39,7 +52,6 @@ import {ref} from 'vue';
   transform: translateY(20px);
   opacity: 0;
 }
-
 
 .detail-title {
   margin: 10px 0 5px 10px;

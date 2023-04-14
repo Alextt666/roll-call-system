@@ -6,32 +6,33 @@
           'class-item',
           selectedSchool == index ? 'class-item-active' : '',
         ]"
-        @click="schoolChangeEffect(item, index)"
+        @click="schoolChangeEffect(index)"
       >
-        艳自拔小学三年五班
+        {{ item.className }}
       </div></template
     >
   </div>
-  <Chart />
-  <Detail />
-
+  <Chart :selectedItem="selectedSchool"/>
+  <Detail :selectedItem="selectedSchool" />
 </template>
 <script setup>
-import { reactive, ref } from "vue";
+import { ref } from "vue";
+import { store } from "@/store/index";
 import Chart from "../Charts/Chart.vue";
-import Detail from '../Detail/Detail.vue';
-const schoolList = reactive([1, 2, 3]);
+import Detail from "../Detail/Detail.vue";
+const schoolList = store.classScore;
 let selectedSchool = ref(0);
-function schoolChangeEffect(item, index) {
+function schoolChangeEffect(index) {
   selectedSchool.value = index;
 }
 </script>
 <style scoped lang="scss">
 .class-items {
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   margin-top: 0.5rem;
   min-height: 1.5rem;
+  gap: 1.2rem;
   cursor: pointer;
   color: $text-gray;
 }
@@ -39,5 +40,4 @@ function schoolChangeEffect(item, index) {
   color: $text-dark;
   border-bottom: 1px solid $text-dark;
 }
-
 </style>
