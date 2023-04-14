@@ -79,10 +79,10 @@ const clickMoreEffect = () => {
     .item-tag {
       font-size: normal;
       font-weight: normal;
-      width: 4.625rem;
+      min-width: 4.625rem;
     }
     .item-name {
-      max-width: 18rem;
+      // max-width: 18rem;
       display: flex;
       justify-content: flex-start;
       column-gap: 0.5rem;

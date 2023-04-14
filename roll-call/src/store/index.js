@@ -5,6 +5,7 @@ const store = reactive({
   allSchool: [],
   tableId: "",
   classScore: [],
+  studentRanking:[],
   updateSchoolList(item) {
     this.allSchool.push(item);
   },
@@ -14,6 +15,9 @@ const store = reactive({
   setClassScore(item) {
     this.classScore.push(item);
   },
+  setStudentRanking(item){
+    this.studentRanking.push(item)
+  }
 });
 
 export { store };

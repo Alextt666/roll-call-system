@@ -23,3 +23,12 @@ export function fetchData(timetableId){
         method:'get',
     })
 }
+
+// 发送奖杯
+export function postAward(data){
+    return request({
+        url:'/api/studentCup',
+        method:'post',
+        data
+    })
+}

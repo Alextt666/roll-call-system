@@ -7,6 +7,9 @@
     />
     <div class="award-text">{{ tagMsg }} +1</div>
   </div>
+  <audio ref="audioPlayer">
+    <source src="@/assets/audio/award.mp3" type="audio/mpeg" />
+  </audio>
   <div class="animte-mask"></div>
 </template>
 <script>
@@ -25,13 +28,28 @@ export default {
   data() {
     return {
       AwardJSON,
+      audioPlaying: false
     };
   },
   methods: {
     handleAnimateComplete() {
       this.$emit("animateComplet");
     },
+    // 音频
+    playAudio() {
+      const audio = this.$refs.audioPlayer;
+      if (this.audioPlaying) {
+        audio.pause();
+        this.audioPlaying = false;
+      } else {
+        audio.play();
+        this.audioPlaying = true;
+      }
+    },
   },
+  mounted () {
+    this.playAudio();
+  }
 };
 </script>
 <style lang="scss">

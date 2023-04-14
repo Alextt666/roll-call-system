@@ -14,7 +14,7 @@
     v-if="showAward"
     :tagMsg="tagMsg"
   />
-
+ 
   <!-- 随机点名 -->
   <el-dialog
     v-model="centerDialogVisible"
@@ -116,16 +116,22 @@
       </div>
       <div class="change-btns">
         <div class="btns-wrapper">
-          <button :class="['change-btn',isAll?'change-btn-active':'']" @click="handleChangeView(true)">
+          <button
+            :class="['change-btn', isAll ? 'change-btn-active' : '']"
+            @click="handleChangeView(true)"
+          >
             班级得分
           </button>
-          <button :class="['change-btn',!isAll?'change-btn-active':'']" @click="handleChangeView(false)">
+          <button
+            :class="['change-btn', !isAll ? 'change-btn-active' : '']"
+            @click="handleChangeView(false)"
+          >
             个人得分
           </button>
         </div>
       </div>
     </template>
-    <div id="data-content" :class="isAll?'':'personal'">
+    <div id="data-content" :class="isAll ? '' : 'personal'">
       <AllData v-if="isAll" />
       <Personal v-else />
     </div>
@@ -137,9 +143,10 @@ import Student from "@/components/Student/Student.vue";
 import Personal from "@/components/DataStruct/Person.vue";
 import AllData from "@/components/DataStruct/AllData.vue";
 import RollButton from "@/components/Content/RollButton.vue";
-import {store} from '@/store/index';
-import { ref, reactive ,toRefs,toRef} from "vue";
-import { fetchTagList,fetchData } from "@/api/request";
+import { store } from "@/store/index";
+import { ref, reactive, toRefs, toRef } from "vue";
+import { fetchTagList, fetchData } from "@/api/request";
+import { ElMessage } from "element-plus";
 const centerDialogVisible = ref(false);
 const studentDialogVisible = ref(false);
 const allClassDialogVisible = ref(false);
@@ -160,42 +167,57 @@ const props = defineProps({
 });
 
 let studentList = reactive([]);
-store.allSchool[0].students.forEach(item=>{
+store.allSchool[0].students.forEach((item) => {
   studentList.push(item);
-})
+});
+
+
+
 
 // 获取标签
-async function fetchTagData(id){
+async function fetchTagData(id) {
   try {
     const res = await fetchTagList(id);
-    if(res?.rows){
-      res.rows.forEach(item=>{
-      tagList.push(item)
-    });
+    if (res?.rows) {
+      res.rows.forEach((item) => {
+        tagList.push(item);
+      });
     }
-  } catch (error) {
-    
-  }
+  } catch (error) {}
 }
 
 // 获取全班图标数据
-async function fetchChartsData(id){
-   const res = await fetchData(id);
-   if(res?.data?.classData){
-    res.data.classData.forEach(item=> store.setClassScore(item));
-   }
+async function fetchChartsData(id) {
+  const res = await fetchData(id);
+
+  try {
+    if (res?.data?.classData) {
+      res.data.classData.forEach((item) => store.setClassScore(item));
+    }
+    if (res?.data?.studentRanking) {
+      res.data.studentRanking.forEach((item) => store.setStudentRanking(item));
+    }
+  } catch (error) {
+    ElMessage({
+      type: "warning",
+      message: "DataStructure has an Error! Please Check Console! ",
+    });
+    console.log(error);
   }
+}
 fetchTagData(store.tableId);
 fetchChartsData(store.tableId);
 // 点击学生
 function handleEmitStudentInfo(item) {
   studentDialogVisible.value = true;
   curStudent = item;
+  console.log(item,'stuInfo Item')
 }
 
 // 奖杯方法
 function handleAward() {
   showAward.value = true;
+
 }
 function handleAnimateComplete() {
   showAward.value = false;
@@ -257,5 +279,5 @@ function handleChangeView(type) {
 }
 </script>
 <style scoped lang="scss">
-@import './Content.scss';
+@import "./Content.scss";
 </style>
