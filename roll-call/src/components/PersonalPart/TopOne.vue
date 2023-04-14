@@ -41,6 +41,7 @@
 <script setup>
 import { toRefs, reactive } from "vue";
 import { store } from "@/store/index";
+
 const threeList = reactive(store.studentRanking.slice(0, 3));
 const [one, two, three] = toRefs(threeList);
 </script>
@@ -54,7 +55,7 @@ const [one, two, three] = toRefs(threeList);
   padding: 0 3rem;
   min-height: 11rem;
   max-height: 11rem;
-  
+
   .top-item {
     width: 8rem;
     position: relative;
