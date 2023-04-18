@@ -2,20 +2,7 @@
   <div class="detail-title">奖杯明细：</div>
   <div :class="['detail-content', isTextMore ? 'detail-content-more' : '']">
     <template v-for="item in awardDetailList">
-      <div class="detail-item">
-        <div class="item-tag">{{ item.studentLabel }}:</div>
-        <div class="item-name">
-          <template v-for="student in item.students">
-            <div class="name">{{ student || "无" }}</div>
-          </template>
-          <div style="display: flex;align-items: center;justify-content: center;">
-            <div class="tag-count">获得</div>
-            <div class="count">
-              {{ `${item.studentLabel}+${item.studentLabelCount}` }}
-            </div>
-          </div>
-        </div>
-      </div>
+        <DetailItem :item="item"/>
     </template>
   </div>
   <transition name="text-more" mode="">
@@ -27,6 +14,7 @@
 <script setup>
 import { ref, reactive, watch } from "vue";
 import { store } from "@/store/index";
+import DetailItem from "./DetailItem.vue";
 
 const props = defineProps({
   selectedItem: Number,
@@ -75,51 +63,7 @@ const clickMoreEffect = () => {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   grid-gap: 5px;
-  .detail-item {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    text-align: center;
-
-    .item-tag {
-      font-size: normal;
-      font-weight: normal;
-      min-width: 4.625rem;
-    }
-    .item-name {
-      // max-width: 18rem;
-      display: flex;
-      justify-content: flex-start;
-      column-gap: 0.5rem;
-      flex-wrap: wrap;
-      padding-left: 1rem;
-      .name {
-        color: $info-color;
-        font-size: smaller;
-        min-width: 2.25rem;
-        width: 2.25rem;
-        min-height: 1.5rem;
-        line-height: 1.5rem;
-        margin-left: 5px;
-        padding-top: 3px;
-      }
-      .tag-count {
-        font-size: smaller;
-        margin-left: 5px;
-        padding-top: 2px;
-        min-height: 1.5rem;
-        line-height: 1.5rem;
-      }
-      .count {
-        font-size: smaller;
-        box-shadow: 0 0 10px $light-gray;
-        margin-left: 5px;
-        padding-top: 2px;
-        padding: 6px;
-        border-radius: 5px;
-      }
-    }
-  }
+ 
 }
 .more-btn {
   text-align: center;
