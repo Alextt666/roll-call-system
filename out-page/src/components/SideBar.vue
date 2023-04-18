@@ -1,15 +1,14 @@
 <template>
   <a class="roll-call"
-  @click="handleClick"
   :href=url
   target="_blank"
   >点名</a>
 </template>
-<script setup>
+<script setup lang="ts">
 import {ref} from 'vue';
 const url = ref('');
 const timeTableId = window.location.search.split("=")[1];
-url.value = `http://192.168.1.19:8080/rollcall/index.html?timetableId=${timeTableId}`
+url.value = `https://h5.classkid.net/teacherDesk?timetableId=${timeTableId}`
 </script>
 <style scoped>
  .roll-call{

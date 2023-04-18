@@ -12,14 +12,14 @@
       </div></template
     >
   </div>
-  <Chart :selectedItem="selectedSchool"/>
+  <Chart :selectedItem="selectedSchool" />
   <Detail :selectedItem="selectedSchool" />
 </template>
 <script setup>
 import { ref } from "vue";
-import { store } from "@/store/index";
 import Chart from "../Charts/Chart.vue";
 import Detail from "../Detail/Detail.vue";
+import { store } from "@/store/index";
 const schoolListDetail = store.classScore;
 let selectedSchool = ref(0);
 function schoolChangeEffect(index) {

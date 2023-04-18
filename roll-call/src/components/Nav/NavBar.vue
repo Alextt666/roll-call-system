@@ -12,8 +12,7 @@ import { ref, watch } from "vue";
 import type { TabsPaneContext } from "element-plus";
 import Content from "@/components/Content/Content.vue";
 import { store } from "@/store/index";
-import { ElMessage } from "element-plus";
-import { fetchTagList, fetchData } from "@/api/request";
+import { fetchChartsData } from '@/utils/fetchTool'
 
 // 获取tabs
 const props = defineProps({
@@ -28,30 +27,8 @@ watch(
     activeName.value = newValue;
   },{immediate:true}
 );
-// 获取全班图标数据
-async function fetchChartsData(id) {
-  const res = await fetchData(id);
-  try {
-    if (res?.data?.classData) {
-      // 班级得分
-      store.setClassScore(res.data.classData);
-    }
-    //  个人排行
-    if (res?.data?.studentRanking) {
-      store.setStudentRanking(res.data.studentRanking);
-    }
-  } catch (error) {
-    ElMessage({
-      type: "warning",
-      message: "DataStructure has an Error! Please Check Console! ",
-    });
-    console.log(error);
-  }
-}
-
 fetchChartsData(store.tableId);
 const handleClick = (tab: TabsPaneContext, event: Event) => {
-  // console.log(tab.index, event);
   schoolIndex.value = tab.index;
 };
 </script>

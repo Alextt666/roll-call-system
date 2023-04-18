@@ -51,11 +51,7 @@
       <div class="dialog-title">学生信息</div>
     </template>
     <div class="dialog-info">
-      <img
-        :src="curStudent.avatar"
-        alt="avator"
-        
-      />
+      <img :src="curStudent.avatar" alt="avator" />
       <div class="info-text">
         <div class="text-name">{{ curStudent.studentName }}</div>
         <div class="text-class">{{ msg }}</div>
@@ -145,6 +141,7 @@ import RollButton from "@/components/Content/RollButton.vue";
 import { store } from "@/store/index";
 import { ref, reactive, toRefs, toRef, watch } from "vue";
 import { fetchTagList, postAward } from "@/api/request";
+import { fetchChartsData } from "@/utils/fetchTool";
 const centerDialogVisible = ref(false);
 const studentDialogVisible = ref(false);
 const allClassDialogVisible = ref(false);
@@ -272,7 +269,9 @@ function handleTrigger() {
 }
 
 // 数据统计
-function handleData() {
+async function handleData() {
+  await fetchChartsData(store.tableId);
+  isAll.value = !isAll.value;
   dataDialogVisible.value = true;
 }
 // 全部 & 个人

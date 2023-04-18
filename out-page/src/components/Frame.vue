@@ -3,7 +3,7 @@
     <iframe class="frame-wrap" :src="classUrl" frameborder="0"> </iframe>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
 import { fetchClassUrl } from "@/api/request/index.js";
 const classUrl = ref("");
