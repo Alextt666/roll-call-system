@@ -97,13 +97,13 @@
       </template>
     </div>
   </el-dialog>
-
   <!-- 数据统计 -->
   <el-dialog
     v-model="dataDialogVisible"
     width="35%"
     center
     class="my-dialog-radius"
+    destroy-on-close
   >
     <template #header>
       <div class="dialog-title" style="border-bottom: 1px solid #ccc">
@@ -271,7 +271,6 @@ function handleTrigger() {
 // 数据统计
 async function handleData() {
   await fetchChartsData(store.tableId);
-  isAll.value = !isAll.value;
   dataDialogVisible.value = true;
 }
 // 全部 & 个人

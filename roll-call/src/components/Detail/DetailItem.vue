@@ -16,7 +16,7 @@
 </template>
 <script setup>
 const props = defineProps({
-  item: Array,
+  item: Object,
 });
 </script>
 <style scoped lang="scss">
