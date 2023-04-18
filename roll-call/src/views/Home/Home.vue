@@ -7,12 +7,13 @@
 </template>
 <script setup>
 import NavBar from "@/components/Nav/NavBar.vue";
-import { reactive } from "vue";
+import { reactive,ref } from "vue";
 import { fetchRoster } from "@/api/request/index";
 import { store } from "@/store/index";
 import { ElMessage } from "element-plus";
 // 获取学校信息
 const ClassList = reactive([]);
+let total = ref(0);
 const timeTableId = window.location.search.split("=")[1];
 store.setTableId(timeTableId);
 function toClassList() {
@@ -20,6 +21,7 @@ function toClassList() {
     const { schoolName, className } = item;
     ClassList.push(`${schoolName}${className}`);
   });
+  total.value = store.allSchool[0].students.length;
 }
 async function init() {
   try {

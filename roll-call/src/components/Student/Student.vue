@@ -7,6 +7,7 @@
       </div>
     </template>
   </div>
+  <div class="total">共计 {{ studentList.length }}人</div>
 </template>
 <script setup>
 const props = defineProps({
@@ -38,5 +39,14 @@ function handleEmitStudentInfo(item) {
   .content-name {
     font-size: 1rem;
   }
+}
+.total{
+  position: fixed;
+  z-index: 998;
+  font-size: 1rem;
+  font-weight: 600;
+  top: 5%;
+  right: 5%;
+  
 }
 </style>
