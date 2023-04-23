@@ -34,12 +34,12 @@ function handleEmitStudentInfo(item) {
   .content-item {
     cursor: pointer;
     min-height: 6.5rem;
-    height: 10rem;
+    height: 9rem;
     .content-img {
-      width: 7rem;
+      width: 6.4rem;
     }
     .content-name {
-      font-size: 1.6rem;
+      font-size: 1.5rem;
     }
   }
 }
