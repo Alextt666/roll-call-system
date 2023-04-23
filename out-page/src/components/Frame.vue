@@ -15,8 +15,7 @@ async function getClassUrl(timeTableId) {
 getClassUrl(timeTableId);
 onMounted(()=>{
   const frame = document.querySelector('iframe');
-  console.log(frame)
-  frame.allow="camera *; microphone *; autoplay *; midi *; encrypted-media *;"
+  frame.allow="display-capture *;camera *; microphone *; autoplay *; midi *; encrypted-media *;"
 })
 </script>
 <style scoped>

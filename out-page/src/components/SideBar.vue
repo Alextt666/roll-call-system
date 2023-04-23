@@ -13,14 +13,16 @@ url.value = `https://h5.classkid.net/teacherDesk?timetableId=${timeTableId}`
 <style scoped>
  .roll-call{
     position: fixed;
-    right: 0;
-    top: 0;
+    bottom: 20px;
+    right: 20px;
     z-index: 999;
-    height: 100vh;
-    width: 3rem;
-    background: black;
+    height: 2rem;
+    line-height: 2rem;
+    box-shadow: 0 0 2px #383838;
+    width: 5rem;
+    background: rgb(97, 94, 226);
+    border-radius: 5px;
     color: white;
-    padding-top: 10%;
     cursor: pointer;
  }
 </style>
