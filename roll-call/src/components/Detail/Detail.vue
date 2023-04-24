@@ -5,11 +5,11 @@
         <DetailItem :item="item"/>
     </template>
   </div>
-  <transition name="text-more" mode="">
+  <!-- <transition name="text-more" mode="">
     <div class="more-btn" v-if="!isTextMore">
       <div @click="clickMoreEffect">查看更多</div>
     </div>
-  </transition>
+  </transition> -->
 </template>
 <script setup>
 import { ref, reactive, watch } from "vue";
@@ -19,7 +19,7 @@ import DetailItem from "./DetailItem.vue";
 const props = defineProps({
   selectedItem: Number,
 });
-const isTextMore = ref(false);
+const isTextMore = ref(true);
 let awardDetailList = reactive([]);
 
 watch(
@@ -29,9 +29,9 @@ watch(
   },
   { immediate: true }
 );
-const clickMoreEffect = () => {
-  isTextMore.value = true;
-};
+// const clickMoreEffect = () => {
+//   isTextMore.value = true;
+// };
 </script>
 <style scoped lang="scss">
 // more结束
@@ -62,7 +62,7 @@ const clickMoreEffect = () => {
   overflow: hidden;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  grid-gap: 5px;
+  grid-gap: 25px;
  
 }
 .more-btn {

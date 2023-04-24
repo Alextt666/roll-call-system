@@ -27,7 +27,7 @@ const props = defineProps({
   text-align: center;
 
   .item-tag {
-    font-size: normal;
+    font-size: 1rem;
     font-weight: normal;
     min-width: 4.625rem;
   }
@@ -40,9 +40,9 @@ const props = defineProps({
     padding-left: 1rem;
     .name {
       color: $info-color;
-      font-size: smaller;
+      font-size: 1rem;
       min-width: 2.25rem;
-      width: 2.25rem;
+      width: 3.25rem;
       min-height: 1.5rem;
       line-height: 1.5rem;
       margin-left: 5px;

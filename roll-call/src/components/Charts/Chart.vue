@@ -19,51 +19,7 @@ watch(
       myPielot.destroy();
     }
     const piePlot = new Pie("container", {
-      appendPadding: 15,
-      data,
-      angleField: "value",
-      colorField: "type",
-      color: ["#A9E7FF", "#5269FF", "#D8F4FF", "#A1D5FF", "#56CFFF"],
-      radius: 1,
-      innerRadius: 0.6,
-      legend: false,
-      autoFit: true,
-      label: {
-        // type:'inner',
-        // type:'outer',
-        type: "spider",
-        // offset: "-30%",
-        // content: "{type}-{value}",
-        content: `{name}\n{value}`,
-        style: {
-          textAlign: "center",
-          fontSize: 11,
-        },
-      },
-      interactions: [{ type: "element-selected" }, { type: "element-active" }],
-      statistic: {
-        title: false,
-        content: {
-          style: {
-            whiteSpace: "pre-wrap",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            fontWeight: 400,
-            fontSize: 14,
-          },
-          content: `奖杯数：${
-            store.classScore[props.selectedItem].studentCupCount
-          }`,
-        },
-      },
-    });
-    piePlot.render();
-    myPielot = piePlot;
-  }
-);
-onMounted(() => {
-  const piePlot = new Pie("container", {
-    appendPadding: 15,
+    appendPadding: 10,
     data,
     angleField: "value",
     colorField: "type",
@@ -73,15 +29,14 @@ onMounted(() => {
     legend: false,
     autoFit: true,
     label: {
-      // type:'inner',
-      // type:'outer',
       type: "spider",
-      // offset: "-30%",
-      // content: "{type}-{value}",
-      content: `{name}\n{value}`,
+      offsetX:3,
+      content: `{name}`,
+      position:'top',
       style: {
         textAlign: "center",
-        fontSize: 11,
+        textBaseline:'top',
+        fontSize: 18,
       },
     },
     interactions: [{ type: "element-selected" }, { type: "element-active" }],
@@ -93,7 +48,50 @@ onMounted(() => {
           overflow: "hidden",
           textOverflow: "ellipsis",
           fontWeight: 400,
-          fontSize: 14,
+          fontSize: 20,
+        },
+        content: `奖杯数：${
+          store.classScore[props.selectedItem].studentCupCount
+        }`,
+      },
+    },
+  });
+    piePlot.render();
+    myPielot = piePlot;
+  }
+);
+onMounted(() => {
+  const piePlot = new Pie("container", {
+    appendPadding: 10,
+    data,
+    angleField: "value",
+    colorField: "type",
+    color: ["#A9E7FF", "#5269FF", "#D8F4FF", "#A1D5FF", "#56CFFF"],
+    radius: 1,
+    innerRadius: 0.6,
+    legend: false,
+    autoFit: true,
+    label: {
+      type: "spider",
+      offsetX:3,
+      content: `{name}`,
+      position:'top',
+      style: {
+        textAlign: "center",
+        textBaseline:'top',
+        fontSize: 18,
+      },
+    },
+    interactions: [{ type: "element-selected" }, { type: "element-active" }],
+    statistic: {
+      title: false,
+      content: {
+        style: {
+          whiteSpace: "pre-wrap",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          fontWeight: 400,
+          fontSize: 20,
         },
         content: `奖杯数：${
           store.classScore[props.selectedItem].studentCupCount
