@@ -110,8 +110,8 @@ button {
   .change-btns {
     text-align: left;
     .btns-wrapper {
-      width: 12rem;
-      height: 1.8rem;
+      width: 13rem;
+      height: 2.5rem;
       background: $lighter-gray;
       display: flex;
       justify-content: center;
@@ -121,14 +121,14 @@ button {
     }
   }
   .change-btn {
-    width: 6rem;
+    width: 6.5rem;
     border-radius: 10px;
-    height: 1.8rem;
+    height: 2.4rem;
     line-height: 1.8rem;
     text-align: center;
     padding: 0;
     margin: 0;
-    font-size: 0.8rem;
+    font-size: 1rem;
     border-radius: 20px;
     background: $lighter-gray;
   }
