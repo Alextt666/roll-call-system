@@ -2,8 +2,8 @@
   <div class="detail-item">
     <div class="item-tag">{{ item.studentLabel }}:</div>
     <div class="item-name">
-      <template v-for="student in item.students">
-        <div class="name">{{ student + "、" || "无" }}</div>
+      <template v-for="(student,index) in item.students">
+        <div class="name">{{ student + (index < item.students.length -1 ? "、" : '') || "无" }}</div>
       </template>
       <div style="display: flex; align-items: center; justify-content: center">
         <div class="tag-count">获得</div>
@@ -15,9 +15,11 @@
   </div>
 </template>
 <script setup>
+
 const props = defineProps({
   item: Object,
 });
+
 </script>
 <style scoped lang="scss">
 .detail-item {
@@ -42,7 +44,7 @@ const props = defineProps({
       color: $info-color;
       font-size: 1rem;
       min-width: 2.25rem;
-      width: 4rem;
+      // width: 4rem;
       min-height: 1.5rem;
       line-height: 1.5rem;
       // margin-left: 5px;
