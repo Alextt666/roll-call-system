@@ -31,12 +31,13 @@ function handleEmitStudentInfo(item) {
   row-gap: 15px;
   align-content: flex-start;
   overflow: scroll;
+  padding-right: 10px;
   .content-item {
     cursor: pointer;
     min-height: 6.5rem;
-    height: 9rem;
+    height: 10rem;
     .content-img {
-      width: 6.4rem;
+      width: 126px;
     }
     .content-name {
       font-size: 1.5rem;

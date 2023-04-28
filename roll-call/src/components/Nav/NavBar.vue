@@ -36,7 +36,7 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
 </script>
 <style>
 .demo-tabs > .el-tabs__content {
-  padding: 32px;
+  padding: 10px;
   /* color: #6b778c; */
   font-size: 32px;
   font-weight: 600;
