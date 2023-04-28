@@ -95,6 +95,15 @@ const [one, two, three] = toRefs(threeList);
         height: 4.5rem;
         color: $text-dark;
         font-size: smaller;
+        .text-name {
+          font-size: 1rem;
+        }
+        .text-award{
+          font-size: 1rem;
+        }
+        .text-class{
+          font-size: 1rem;
+        }
       }
       .text-class {
         color: $text-gray;

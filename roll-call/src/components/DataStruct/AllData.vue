@@ -33,6 +33,7 @@ function schoolChangeEffect(index) {
   margin-top: 0.5rem;
   min-height: 1.5rem;
   gap: 1.2rem;
+  font-size: 1.2rem;
   cursor: pointer;
   color: $text-gray;
 }

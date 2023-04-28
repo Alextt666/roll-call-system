@@ -35,6 +35,7 @@ const otherList = store.studentRanking.slice(2, -1);
     text-align: center;
     padding: 10px;
     border-top: 1px solid #ccc;
+    font-size: 1rem;
     .three-text-img {
       width: 2rem;
     }

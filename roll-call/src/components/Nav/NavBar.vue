@@ -37,8 +37,11 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
 <style>
 .demo-tabs > .el-tabs__content {
   padding: 32px;
-  color: #6b778c;
+  /* color: #6b778c; */
   font-size: 32px;
   font-weight: 600;
+}
+.demo-tabs > .el-tabs__header .el-tabs__item{
+  font-size: 1.5rem;
 }
 </style>

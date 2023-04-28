@@ -50,6 +50,7 @@ watch(
   margin: 10px 0 5px 10px;
   font-weight: normal;
   color: $text-dark;
+  font-size: 1rem;
 }
 
 .detail-content {

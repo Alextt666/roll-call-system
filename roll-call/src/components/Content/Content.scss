@@ -73,9 +73,10 @@ button {
     .tag {
       border-radius: 10px;
       text-align: center;
-      height: 2.5rem;
+      height: 3.5rem;
       color: $text-dark;
-      line-height: 2.5rem;
+      line-height: 3.5rem;
+      font-size: 1rem;
       background-color: $lightest-gray;
       cursor: pointer;
     }
@@ -138,8 +139,7 @@ button {
   
   #data-content {
     min-height: 400px;
-    // height: 28rem;
-    height: 37vw;
+    height: 36rem;
     transform: translateY(-5%);
   }
   .personal{
@@ -148,7 +148,8 @@ button {
   @media screen and (min-width: 1445px) {
     #data-content {
       min-height: 400px;
-      height: 33rem;
+      height: 36rem;
       transform: translateY(-5%);
     }
+    
   }

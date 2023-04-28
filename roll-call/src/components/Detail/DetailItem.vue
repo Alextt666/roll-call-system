@@ -58,7 +58,7 @@ const props = defineProps({
     .count {
       font-size: smaller;
       box-shadow: 0 0 10px $light-gray;
-      margin-left: 5px;
+      margin-left: 12px;
       padding-top: 2px;
       padding: 6px;
       border-radius: 5px;
