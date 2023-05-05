@@ -1,6 +1,6 @@
 <template>
   <div class="top-one">
-    <div class="top-item" v-if="two">
+    <div class="top-item" v-show="two">
       <img :src="two.avatar" alt="avatar" class="item-img" />
       <img src="@/assets/imgs/scap.svg" alt="cap" class="item-cap" />
       <img src="@/assets/imgs/2.svg" alt="2" class="item-no" />
@@ -8,11 +8,11 @@
         <div class="top-item-content-text">
           <div class="text-name">{{ two.studentName }}</div>
           <div class="text-award">奖杯数: {{ two.count }}</div>
-          <div class="text-class">{{ two.className }}</div>
+          <div class="text-class emphasis">{{two.schoolName}}{{ two.className }}</div>
         </div>
       </div>
     </div>
-    <div class="top-item top" v-if="one">
+    <div class="top-item top" v-show="one">
       <img :src="one.avatar" alt="avatar" class="item-img" />
       <img src="@/assets/imgs/gcap.svg" alt="cap" class="item-cap" />
       <img src="@/assets/imgs/1.svg" alt="2" class="item-no" />
@@ -20,11 +20,11 @@
         <div class="top-item-content-text">
           <div class="text-name">{{ one.studentName }}</div>
           <div class="text-award">奖杯数: {{ one.count }}</div>
-          <div class="text-class">{{ one.className }}</div>
+          <div class="text-class emphasis">{{ one.schoolName }}{{ one.className }}</div>
         </div>
       </div>
     </div>
-    <div class="top-item" v-if="three">
+    <div class="top-item" v-show="three">
       <img :src="three.avatar" alt="avatar" class="item-img" />
       <img src="@/assets/imgs/bcap.svg" alt="cap" class="item-cap" />
       <img src="@/assets/imgs/3.svg" alt="2" class="item-no" />
@@ -32,7 +32,7 @@
         <div class="top-item-content-text">
           <div class="text-name">{{ three.studentName }}</div>
           <div class="text-award">奖杯数: {{ three.count }}</div>
-          <div class="text-class">{{ three.className }}</div>
+          <div class="text-class emphasis">{{ three.schoolName }}{{ three.className }}</div>
         </div>
       </div>
     </div>
@@ -46,6 +46,8 @@ const threeList = reactive(store.studentRanking.slice(0, 3));
 const [one, two, three] = toRefs(threeList);
 </script>
 <style lang="scss" scoped>
+@import url('@/assets/colors/other.scss');
+
 .top-one {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -102,7 +104,7 @@ const [one, two, three] = toRefs(threeList);
           font-size: 1rem;
         }
         .text-class{
-          font-size: 1rem;
+          font-size: .8rem;
         }
       }
       .text-class {

@@ -11,7 +11,7 @@
 <style scoped lang="scss">
 .top-two {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 2fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 3fr 1fr;
   justify-content: center;
   align-items: center;
   text-align: center;

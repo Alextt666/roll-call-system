@@ -8,7 +8,7 @@
         ]"
         @click="schoolChangeEffect(index)"
       >
-        {{ item.className }}
+       {{ item.schoolName }}{{ item.className }}
       </div></template
     >
   </div>

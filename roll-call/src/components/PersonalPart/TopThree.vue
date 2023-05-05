@@ -11,7 +11,7 @@
           />
         </div>
         <div>{{ item.studentName }}</div>
-        <div>{{ item.className }}</div>
+        <div class="emphasis">{{item.schoolName }}{{ item.className }}</div>
         <div>{{ item.count }}</div>
       </div>
     </template>
@@ -29,7 +29,7 @@ const otherList = store.studentRanking.slice(2, -1);
   overflow-x: hidden;
   .three-text {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 2fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 3fr 1fr;
     justify-content: center;
     align-items: center;
     text-align: center;
