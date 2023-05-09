@@ -10,7 +10,7 @@
 </template>
 <script lang="ts" setup>
 import { ref, watch } from "vue";
-import type { TabsPaneContext } from "element-plus";
+// import type { TabsPaneContext } from "element-plus";
 import Content from "@/components/Content/Content.vue";
 import { store } from "@/store/index";
 import { fetchChartsData } from "@/utils/fetchTool";
@@ -30,7 +30,7 @@ watch(
   { immediate: true }
 );
 fetchChartsData(store.tableId);
-const handleClick = (tab: TabsPaneContext, event: Event) => {
+const handleClick = (tab, event: Event) => {
   schoolIndex.value = tab.index;
 };
 </script>

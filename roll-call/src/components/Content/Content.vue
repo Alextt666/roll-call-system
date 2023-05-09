@@ -104,7 +104,8 @@
     center
     class="my-dialog-radius"
     destroy-on-close
-  >
+    style="margin-top:5vh"
+    >
     <template #header>
       <div class="dialog-title" style="border-bottom: 1px solid #ccc">
         数据统计
