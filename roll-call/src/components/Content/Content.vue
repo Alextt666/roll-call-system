@@ -3,12 +3,16 @@
     :studentList="studentList"
     @emitStudentInfo="handleEmitStudentInfo"
   />
-  <div class="footer">
-    <button @click="handleRollCallAll" class="global-btn">全 班</button>
-    <button @click="handleRollCall" class="global-btn">随机点名</button>
-    <button @click="handleData" class="global-btn">数据统计</button>
+  <!-- <div class="footer" id="footerBtns">
+    <button data-action="all" @click="handleRollCallAll" class="global-btn">全 班</button>
+    <button data-action="random" @click="handleRollCall" class="global-btn">随机点名</button>
+    <button data-action="statistic" @click="handleData" class="global-btn">数据统计</button>
+  </div> -->
+  <div class="footer" @click="handleFooter">
+    <button data-action="all" class="global-btn">全 班</button>
+    <button data-action="random" class="global-btn">随机点名</button>
+    <button data-action="statistic" class="global-btn">数据统计</button>
   </div>
-
   <Award
     @animateComplet="handleAnimateComplete"
     v-if="showAward"
@@ -104,8 +108,8 @@
     center
     class="my-dialog-radius"
     destroy-on-close
-    style="margin-top:5vh"
-    >
+    style="margin-top: 5vh"
+  >
     <template #header>
       <div class="dialog-title" style="border-bottom: 1px solid #ccc">
         数据统计
@@ -140,7 +144,7 @@ import Personal from "@/components/DataStruct/Person.vue";
 import AllData from "@/components/DataStruct/AllData.vue";
 import RollButton from "@/components/Content/RollButton.vue";
 import { store } from "@/store/index";
-import { ref, reactive, toRefs, toRef, watch } from "vue";
+import { ref, reactive, toRefs, toRef, watch,onMounted } from "vue";
 import { fetchTagList, postAward } from "@/api/request";
 import { fetchChartsData } from "@/utils/fetchTool";
 const centerDialogVisible = ref(false);
@@ -171,6 +175,31 @@ watch(
   },
   { immediate: true }
 );
+
+// footer按钮
+class footerBtn {
+  all() {
+    allClassDialogVisible.value = true;
+  }
+  random() {
+    handleRollCall();
+  }
+  async statistic() {
+    dataDialogVisible.value = true;
+    await fetchChartsData(store.tableId);
+  }
+  onClick(event) {
+    let action = event.target.dataset.action;
+    if (action) {
+      this[action]();
+    }
+  }
+}
+const footer = new footerBtn();
+function handleFooter(event){
+  footer.onClick(event)
+}
+
 
 // 当前学校
 function changeSchoolList(index) {
@@ -208,7 +237,7 @@ function handleAnimateComplete() {
   showAward.value = false;
 }
 
-// 随机点名
+// // 随机点名
 function handleRollCall() {
   centerDialogVisible.value = true;
   calling.value = true;
@@ -218,6 +247,16 @@ function handleRollCall() {
     student.value = studentList[count].studentName;
   }, 50);
 }
+// // 全班点名
+// function handleRollCallAll() {
+//   allClassDialogVisible.value = true;
+// }
+// // 数据统计
+// async function handleData() {
+//   await fetchChartsData(store.tableId);
+//   dataDialogVisible.value = true;
+// }
+
 function handleRollCallStop() {
   clearInterval(intervalId);
   calling.value = false;
@@ -225,10 +264,6 @@ function handleRollCallStop() {
 function rollcallDialogClose() {
   clearInterval(intervalId);
   calling.value = false;
-}
-// 全班点名
-function handleRollCallAll() {
-  allClassDialogVisible.value = true;
 }
 
 // 标签发送
@@ -269,11 +304,6 @@ function handleTrigger() {
   handleEmitStudentInfo(studentList[count]);
 }
 
-// 数据统计
-async function handleData() {
-  await fetchChartsData(store.tableId);
-  dataDialogVisible.value = true;
-}
 // 全部 & 个人
 function handleChangeView(type) {
   isAll.value = type;
